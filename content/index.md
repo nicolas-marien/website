@@ -1,6 +1,11 @@
 ---
-title: Welcome to Quartz
+title: Nicolas Marien garden
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+<img src="./memoji.jpg" />
+
+Welcome traveler 👋
+
+My name is Nicolas.
+I am a software engineer currently working at [PayFit](https://payfit.com/), father of two tiny goblins 🐣.
+
