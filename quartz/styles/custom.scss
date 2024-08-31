@@ -1,6 +1,10 @@
 @use "./base.scss";
 // @use "../../output.scss"; // put your custom CSS here!
 
-@tailwind base;
+// @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[data-slug] .page-header {
+  display: none;
+}
