@@ -5,7 +5,14 @@ import { i18n } from "../i18n"
 import { Github, LinkedIn } from "./Icons"
 
 interface Options {
-  links: Record<string, string>
+  links: Record<
+    string,
+    {
+      link: string
+      icon: any
+      extra?: Record<string, unknown>
+    }
+  >
 }
 
 export default ((opts?: Options) => {
@@ -20,9 +27,11 @@ export default ((opts?: Options) => {
           <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a> © {year}
         </p>
         <ul class="mt-4">
-          {Object.entries(links).map(([name, link]) => (
+          {Object.values(links).map(({ link, icon: Icon, extra }) => (
             <li class="flex items-center space-x-2">
-              <a href={link}>{name === "github" ? <Github /> : <LinkedIn />}</a>
+              <a href={link} {...extra}>
+                <Icon />
+              </a>
             </li>
           ))}
         </ul>

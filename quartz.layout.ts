@@ -1,5 +1,6 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
+import { Github, LinkedIn, Mastodon } from "./quartz/components/Icons"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -8,8 +9,21 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
-      github: "https://github.com/nicolas-marien",
-      linkedin: "https://www.linkedin.com/in/nicolas-marien-3787b55b/",
+      github: {
+        link: "https://github.com/nicolas-marien",
+        icon: Github,
+      },
+      linkedin: {
+        link: "https://www.linkedin.com/in/nicolas-marien-3787b55b/",
+        icon: LinkedIn,
+      },
+      mastodon: {
+        link: "https://mastodon.social/@nico29",
+        icon: Mastodon,
+        extra: {
+          rel: "me",
+        },
+      },
     },
   }),
 }
