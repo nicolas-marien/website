@@ -1,8 +1,6 @@
 ---
-title: So it begins
+title: Nicolas Marien
 ---
-
-<img src="./memoji.jpg" class="rounded-full w-32 h-32"/>
 
 <p class="text-2xl">Welcome traveler 👋</p>
 
