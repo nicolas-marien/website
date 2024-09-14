@@ -1,6 +1,7 @@
 ---
 title: Improving .env collaboration with 1Password CLI
 draft: false
+date: 2024-08-31
 tags:
   - devxp
 ---
