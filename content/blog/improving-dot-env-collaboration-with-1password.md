@@ -23,7 +23,7 @@ Since we hired new contributors, we needed to find a solution that would allow t
 
 In my organization, we use 1Password to store day-to-day credentials. And in my team we have a dedicated vault where we but our development credentials, like API keys for providers A, B and C.
 
-And 1Password ships with a [CLI][1]! So we figured that there should be something we can do to leverage this tool.
+And 1Password ships with a [CLI](https://developer.1password.com/docs/cli/get-started/)! So we figured that there should be something we can do to leverage this tool.
 
 Here is what we tried and what we settled on.
 
@@ -33,7 +33,7 @@ Here is what we tried and what we settled on.
 
 While this approach is straightforward to set up it, I feel it lacks several features to become a robust daily driver.
 On the first hand, updating the file is not seamless. It has to be downloaded, modified and then re-uploaded.
-On the second hand, it is difficult to keep track of the modifications made to the file. And even if 1Password provides some insights, they are not as powerful compared to [git][2], where you get history, blame etc…
+On the second hand, it is difficult to keep track of the modifications made to the file. And even if 1Password provides some insights, they are not as powerful compared to git, where you get history, blame etc…
 Moreover, I feel it's same to assume that we want to have each secret as a separate entry inside the vault. As a consequence, having the file directly in the vault removes the single source of truth for an entry.
 
 ## Second iteration: crafting the file via a shell script
@@ -43,8 +43,8 @@ We also assigned a dedicated tag to those entries.
 Since we would rather not put things that were not secrets in 1Password, we created a `.env` file (git-ignored) that contained all our regular variables.
 Then we wrote a shell script that pulled all the entries marked with our tag in JSON format.
 The next step was to fetch each individual item so we can access our custom field.
-We then used [jq][3] to extract the `variable` field and glued everything together and appended our secrets to the existing `.env` file.
-At this time, we were also using a local instance of AWS secret manager using [localstack][4], so we used this script to seed the secrets in there as well.
+We then used [jq](https://jqlang.github.io/jq/) to extract the `variable` field and glued everything together and appended our secrets to the existing `.env` file.
+At this time, we were also using a local instance of AWS secret manager using [localstack](https://www.localstack.cloud/), so we used this script to seed the secrets in there as well.
 
 We dwelled on this iteration for months, and while it was perfectly fine, it was something else we needed to maintain, it also requires extra metadata in the vault for it to work.
 
@@ -57,8 +57,8 @@ So once again, we embarked on a new journey to find a solution. This time someth
 And often the answer lies in the question: how can we leverage 1Password CLI for our `.env` file management?
 We'll have a proper read of the documentation 😅
 We found that the `inject` command of the CLI is everything we wished for.
-Our repository contains a `.env.tpl` file, which is **not git-ignored**. And inside this file are [secret references][5], alongside regular variables.
-To generate the final `.env` file, we just tell 1Password to use our template file as input and to create the file (see [this document][6]).
+Our repository contains a `.env.tpl` file, which is **not git-ignored**. And inside this file are [secret references](https://developer.1password.com/docs/cli/secret-reference-syntax/), alongside regular variables.
+To generate the final `.env` file, we just tell 1Password to use our template file as input and to create the file: `op inject -i .env.tpl -o .env` ([see also](https://developer.1password.com/docs/cli/secrets-config-files)).
 
 ## Conclusion
 
