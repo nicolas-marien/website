@@ -6,7 +6,11 @@ import { Github, LinkedIn, Mastodon } from "./quartz/components/Icons"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
+  afterBody: [
+    Component.RecentNotes({
+      filter: (data) => data.frontmatter?.title !== "Nicolas Marien",
+    }),
+  ],
   footer: Component.Footer({
     links: {
       github: {
@@ -44,9 +48,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Darkmode(),
     Component.DesktopOnly(Component.Explorer()),
   ],
-  right: [
-    Component.DesktopOnly(Component.TableOfContents()),
-  ],
+  right: [Component.DesktopOnly(Component.TableOfContents())],
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)

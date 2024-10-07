@@ -8,3 +8,9 @@
 [data-slug="index"] .page-header {
   visibility: hidden;
 }
+
+[data-slug]:not([data-slug="index"]) {
+  .recent-notes {
+    display: none;
+  }
+}
