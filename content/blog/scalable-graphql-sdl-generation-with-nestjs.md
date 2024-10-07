@@ -1,6 +1,6 @@
 ---
-title: Easy GraphQL SDL generation with NestJS
-draft: true
+title: Scalable GraphQL SDL generation with NestJS
+draft: false
 tags:
   - devxp
   - graphql
