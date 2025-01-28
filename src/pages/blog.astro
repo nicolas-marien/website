@@ -3,18 +3,19 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 const posts: CollectionEntry<"blog">[] = await getCollection("blog");
+console.log(posts.map((post) => post.data.created_at));
 ---
 
 <Layout>
-  <h1>Blog page</h1>
-
-  <h2>Posts</h2>
-
   <ul>
     {
       posts.map((post) => (
         <li>
-          <a href={`/posts/${post.id}`}>{post.data.title}</a>
+          <div>
+            <a href={`/posts/${post.id}`}>{post.data.title}</a>
+            <time datetime={post.data.created_at}>{post.data.created_at}</time>
+            <div>{post.data.abstract}</div>
+          </div>
         </li>
       ))
     }
