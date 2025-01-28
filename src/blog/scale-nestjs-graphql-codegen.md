@@ -80,5 +80,5 @@ Of course, many things could be improved, but thanks to this piece of code, I do
 > [!warning]
 > Where this solution falls short is if someone in the team forgets to add the `.resolver` suffix, or uses a default export.
 >
-> > [!tip]
-> > However this could be addressed by custom linter rules for instance.
+>> [!tip]
+>> However this could be addressed by custom linter rules for instance.
