@@ -2,7 +2,8 @@
 title: Improving .env collaboration with 1Password CLI
 slug: improving-dot-env-collaboration
 draft: false
-created_at: 2024-08-31
+created_at: "2024-08-31"
+abstract: "How we improved our collaboration on .env files using 1Password CLI"
 tags:
   - devxp
 ---

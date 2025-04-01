@@ -1,10 +1,11 @@
 ---
 draft: false
 title: Use Tailwind CSS with Quartz
+abstract: "How to use Tailwind CSS with Quartz"
 tags:
   - code
   - obsidian
-created_at: 2024-09-14
+created_at: "2024-09-14"
 ---
 
 # Context

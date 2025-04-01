@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Tag from '../components/tag.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, tags } = Astro.props as Props;
+const hasTags = !!tags.length;
+---
+
+<section>
+  <div>
+    <h1 class="text-3xl">{title}</h1>
+    {
+      hasTags && (
+        <ul>
+          {tags.map((tag) => (
+            <Tag>{tag}</Tag>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+  <article class="prose lg:prose-xl">
+    <slot />
+  </article>
+</section>

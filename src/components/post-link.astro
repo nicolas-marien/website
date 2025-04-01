@@ -1,0 +1,25 @@
+---
+type Props = {
+  id: string;
+  title: string;
+  created_at: string;
+  abstract: string;
+};
+
+const { title, created_at, abstract, id } = Astro.props as Props;
+
+const createAtDate = new Date(created_at);
+const formatter = new Intl.DateTimeFormat(undefined, {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<div>
+  <a href={`/posts/${id}`}>{title}</a>
+  <time datetime={created_at}>
+    {formatter.format(createAtDate)}
+  </time>
+  <div>{abstract}</div>
+</div>

@@ -1,8 +1,9 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection, render } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection('blog');
   return posts.map((post) => ({
     params: { id: post.id },
     props: { post },
@@ -12,8 +13,6 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<h1>{post.data.title}</h1>
-
-<article class="prose lg:prose-xl">
+<BlogPost {...post.data}>
   <Content />
-</article>
+</BlogPost>

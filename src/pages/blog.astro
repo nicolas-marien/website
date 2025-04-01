@@ -1,23 +1,20 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from '../layouts/Layout.astro';
+import PostLink from '../components/post-link.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
-const posts: CollectionEntry<"blog">[] = await getCollection("blog");
-console.log(posts.map((post) => post.data.created_at));
+const posts: CollectionEntry<'blog'>[] = await getCollection('blog');
 ---
 
 <Layout>
-  <ul>
-    {
-      posts.map((post) => (
-        <li>
-          <div>
-            <a href={`/posts/${post.id}`}>{post.data.title}</a>
-            <time datetime={post.data.created_at}>{post.data.created_at}</time>
-            <div>{post.data.abstract}</div>
-          </div>
-        </li>
-      ))
-    }
-  </ul>
+  {
+    posts.map((post) => (
+      <PostLink
+        id={post.id}
+        title={post.data.title}
+        abstract={post.data.abstract}
+        created_at={post.data.created_at}
+      />
+    ))
+  }
 </Layout>
