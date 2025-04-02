@@ -1,5 +1,34 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from '../layouts/Layout.astro';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import PostLink from '../components/post-link.astro';
+
+const posts: CollectionEntry<'blog'>[] = await getCollection('blog');
+const recentPosts = posts
+  .sort((a, b) => {
+    return new Date(b.data.created_at).getTime() - new Date(a.data.created_at).getTime();
+  })
+  .slice(0, 2);
 ---
 
-<Layout> I am interesting, trust me! </Layout>
+<Layout>
+  <p class="mt-2 text-lg text-gray-600">
+    Software Engineer, trying to survive two kids and a cat
+  </p>
+
+  <h2>Recent publications</h2>
+  <div>
+    {
+      recentPosts.map((post) => (
+        <PostLink
+          id={post.id}
+          title={post.data.title}
+          abstract={post.data.abstract}
+          created_at={post.data.created_at}
+        />
+      ))
+    }
+
+    <a href="/blog">Read more</a>
+  </div>
+</Layout>
