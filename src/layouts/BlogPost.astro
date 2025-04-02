@@ -8,16 +8,16 @@ const { title, tags } = Astro.props as Props;
 const hasTags = !!tags.length;
 ---
 
-<section>
+<section class="mt-8">
   <div>
     <h1 class="text-3xl">{title}</h1>
     {
       hasTags && (
-        <ul>
+        <div class="flex gap-3 mb-8 mt-4">
           {tags.map((tag) => (
             <Tag>{tag}</Tag>
           ))}
-        </ul>
+        </div>
       )
     }
   </div>

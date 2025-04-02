@@ -12,11 +12,10 @@ const recentPosts = posts
 ---
 
 <Layout>
-  <p class="mt-2 text-lg text-gray-600">
-    Software Engineer, trying to survive two kids and a cat
-  </p>
-
-  <h2>Recent publications</h2>
+  <div class="w-full">
+    <p class="py-6">Software Engineer, trying to survive two kids and a cat</p>
+  </div>
+  <h2 class="font-bold text-lg uppercase">Recent publications</h2>
   <div>
     {
       recentPosts.map((post) => (
@@ -29,6 +28,6 @@ const recentPosts = posts
       ))
     }
 
-    <a href="/blog">Read more</a>
+    <a href="/blog">More posts</a>
   </div>
 </Layout>

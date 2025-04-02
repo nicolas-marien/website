@@ -3,7 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import PostLink from '../components/post-link.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
-const posts: CollectionEntry<'blog'>[] = await getCollection('blog');
+let posts: CollectionEntry<'blog'>[] = await getCollection('blog');
+posts = posts.sort(
+  (a, b) => new Date(b.data.created_at).getTime() - new Date(a.data.created_at).getTime(),
+);
 ---
 
 <Layout>
