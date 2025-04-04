@@ -2,6 +2,7 @@
 import Header from '../components/header.astro';
 import Navigation from '../components/navigation.astro';
 import GlobalStyles from '../components/global-styles.astro';
+import '../styles/global.css';
 ---
 
 <!doctype html>
@@ -13,7 +14,7 @@ import GlobalStyles from '../components/global-styles.astro';
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
   </head>
-  <body class="max-w-4xl m-auto">
+  <body class="max-w-4xl m-auto bg-light-bg">
     <GlobalStyles />
     <Header />
     <Navigation />

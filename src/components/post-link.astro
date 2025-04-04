@@ -18,9 +18,13 @@ const formatter = new Intl.DateTimeFormat(undefined, {
 
 <div class="flex flex-col gap-1.5 mt-6 mb-6">
   <a href={`/posts/${id}`} class="text-2xl font-bold block italic">{title}</a>
-  <time datetime={created_at} class="block text-gray-600">
+  <time datetime={created_at} class="block text-base-600">
     {formatter.format(createAtDate)}
   </time>
   <div>{abstract}</div>
-  <a href={`/posts/${id}`} class="text-blue-500 hover:underline">Read more</a>
+  <a
+    href={`/posts/${id}`}
+    class="text-blue-600 hover:underline hover:underline-offset-2 hover:decoration-2"
+    >Read more</a
+  >
 </div>

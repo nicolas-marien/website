@@ -4,14 +4,23 @@ import remarkCallout from '@r4ai/remark-callout';
 
 import mdx from '@astrojs/mdx';
 
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
+
+import expressiveCode from 'astro-expressive-code';
 
 export default defineConfig({
-  integrations: [mdx(), tailwind()],
+  integrations: [
+    expressiveCode({
+      themes: ['kanagawa-wave'],
+    }),
+    mdx(),
+  ],
+
   markdown: {
     remarkPlugins: [remarkCallout],
-    shikiConfig: {
-      theme: 'tokyo-night',
-    },
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
   },
 });
