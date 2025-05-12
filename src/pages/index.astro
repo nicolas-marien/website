@@ -5,6 +5,7 @@ import PostLink from '../components/post-link.astro';
 
 const posts: CollectionEntry<'blog'>[] = await getCollection('blog');
 const recentPosts = posts
+  .filter((p) => !p.data.draft)
   .sort((a, b) => {
     return new Date(b.data.created_at).getTime() - new Date(a.data.created_at).getTime();
   })
@@ -13,7 +14,10 @@ const recentPosts = posts
 
 <Layout>
   <div class="w-full">
-    <p class="py-6">Software Engineer, trying to survive two kids and a cat</p>
+    <p class="py-6">
+      Software Engineer @ <a href="http://payfit.com/">PayFit</a>, trying to survive two kids
+      and a cat
+    </p>
   </div>
   <h2 class="font-bold text-xl uppercase">Recent publications</h2>
   <div>
@@ -30,7 +34,7 @@ const recentPosts = posts
 
     <a
       href="/blog"
-      class="text-lg bold hover:underline hover:underline-offset-2 hover:decoration-2"
+      class="text-lg bold hover:underline hover:underline-offset-2 hover:decoration-2 hover:decoration-cyan-600"
       >More posts 🔗</a
     >
   </div>
