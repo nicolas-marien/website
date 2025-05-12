@@ -9,6 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 import expressiveCode from 'astro-expressive-code';
 
 export default defineConfig({
+  site: 'https://nicolasmarien.dev',
   integrations: [
     expressiveCode({
       themes: ['kanagawa-wave'],
