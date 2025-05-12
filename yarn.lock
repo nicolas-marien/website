@@ -80,6 +80,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@astrojs/rss@npm:4.0.11":
+  version: 4.0.11
+  resolution: "@astrojs/rss@npm:4.0.11"
+  dependencies:
+    fast-xml-parser: "npm:^4.5.0"
+    kleur: "npm:^4.1.5"
+  checksum: 10c0/9ac4ec0801eb356d150c5259bc53dcaecb011f87261a347ad7bfc61931f5a330a3013e29ef04cccae0c39906c0881d3e361f5e38d2d5bb5833d6f395ad52b7cc
+  languageName: node
+  linkType: hard
+
 "@astrojs/telemetry@npm:3.2.0":
   version: 3.2.0
   resolution: "@astrojs/telemetry@npm:3.2.0"
@@ -1081,7 +1091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tailwindcss/vite@npm:^4.1.2":
+"@tailwindcss/vite@npm:4.1.2":
   version: 4.1.2
   resolution: "@tailwindcss/vite@npm:4.1.2"
   dependencies:
@@ -1317,7 +1327,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro-expressive-code@npm:^0.40.2":
+"astro-expressive-code@npm:0.40.2":
   version: 0.40.2
   resolution: "astro-expressive-code@npm:0.40.2"
   dependencies:
@@ -2094,6 +2104,17 @@ __metadata:
   version: 3.0.2
   resolution: "extend@npm:3.0.2"
   checksum: 10c0/73bf6e27406e80aa3e85b0d1c4fd987261e628064e170ca781125c0b635a3dabad5e05adbf07595ea0cf1e6c5396cacb214af933da7cbaf24fe75ff14818e8f9
+  languageName: node
+  linkType: hard
+
+"fast-xml-parser@npm:^4.5.0":
+  version: 4.5.3
+  resolution: "fast-xml-parser@npm:4.5.3"
+  dependencies:
+    strnum: "npm:^1.1.1"
+  bin:
+    fxparser: src/cli/cli.js
+  checksum: 10c0/bf9ccadacfadc95f6e3f0e7882a380a7f219cf0a6f96575149f02cb62bf44c3b7f0daee75b8ff3847bcfd7fbcb201e402c71045936c265cf6d94b141ec4e9327
   languageName: node
   linkType: hard
 
@@ -4731,6 +4752,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"strnum@npm:^1.1.1":
+  version: 1.1.2
+  resolution: "strnum@npm:1.1.2"
+  checksum: 10c0/a0fce2498fa3c64ce64a40dada41beb91cabe3caefa910e467dc0518ef2ebd7e4d10f8c2202a6104f1410254cae245066c0e94e2521fb4061a5cb41831952392
+  languageName: node
+  linkType: hard
+
 "style-to-object@npm:^1.0.0":
   version: 1.0.8
   resolution: "style-to-object@npm:1.0.8"
@@ -5171,11 +5199,12 @@ __metadata:
   resolution: "website@workspace:."
   dependencies:
     "@astrojs/mdx": "npm:4.2.3"
+    "@astrojs/rss": "npm:4.0.11"
     "@r4ai/remark-callout": "npm:0.6.2"
     "@tailwindcss/typography": "npm:0.5.16"
-    "@tailwindcss/vite": "npm:^4.1.2"
+    "@tailwindcss/vite": "npm:4.1.2"
     astro: "npm:5.6.1"
-    astro-expressive-code: "npm:^0.40.2"
+    astro-expressive-code: "npm:0.40.2"
     prettier: "npm:3.5.3"
     prettier-plugin-astro: "npm:0.14.1"
     tailwindcss: "npm:^4.1.2"
