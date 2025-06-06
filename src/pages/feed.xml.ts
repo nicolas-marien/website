@@ -3,7 +3,8 @@ import { type APIContext } from 'astro';
 import { getCollection } from 'astro:content';
 
 export async function GET(context: APIContext) {
-  const posts = await getCollection('blog');
+  let posts = await getCollection('blog');
+  posts = posts.filter((p) => !p.data.draft);
   return rss({
     title: 'Nicolas Marien - Blog',
     // `<description>` field in output xml
