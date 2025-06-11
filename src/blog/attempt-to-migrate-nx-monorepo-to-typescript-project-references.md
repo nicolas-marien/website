@@ -1,0 +1,1 @@
+/Users/nicolasmarien/Vaults/Holocron/Posts/attempt-to-migrate-nx-monorepo-to-typescript-project-references.md
