@@ -1,6 +1,6 @@
 ---
 title: Attempt to Migrate Nx Monorepo to TypeScript Project References
-draft: true
+draft: false
 slug: typescript-project-references-migration-attempts
 tags:
   - typescript
