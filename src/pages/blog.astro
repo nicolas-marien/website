@@ -7,7 +7,7 @@ let posts: CollectionEntry<'blog'>[] = await getCollection('blog');
 posts = posts
   .filter((p) => !p.data.draft)
   .sort(
-    (a, b) => new Date(b.data.created_at).getTime() - new Date(a.data.created_at).getTime(),
+    (a, b) => new Date(b.data.published_at).getTime() - new Date(a.data.published_at).getTime(),
   );
 ---
 
@@ -18,7 +18,7 @@ posts = posts
         id={post.id}
         title={post.data.title}
         abstract={post.data.abstract}
-        created_at={post.data.created_at}
+        published_at={post.data.published_at}
       />
     ))
   }

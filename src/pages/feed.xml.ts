@@ -17,7 +17,7 @@ export async function GET(context: APIContext) {
     items: posts.map<RSSFeedItem>((post) => {
       return {
         title: post.data.title,
-        pubDate: new Date(post.data.created_at),
+        pubDate: new Date(post.data.published_at),
         description: post.data.abstract,
         // Compute RSS link from post `id`
         // This example assumes all posts are rendered as `/blog/[id]` routes

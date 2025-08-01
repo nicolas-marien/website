@@ -1,6 +1,7 @@
 ---
 title: Scalable GraphQL SDL generation with NestJS
 created_at: "2024-10-07"
+published_at: "2024-10-07"
 abstract: "How to generate a GraphQL SDL file from your NestJS resolvers"
 draft: false
 tags:

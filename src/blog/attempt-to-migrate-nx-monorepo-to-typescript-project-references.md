@@ -7,6 +7,7 @@ tags:
   - nx
   - monorepo
 created_at: '2025-06-05'
+published_at: '2025-06-05'
 abstract: This blog post explores the migration to TypeScript project references in an NX monorepo, detailing the benefits of improved type checking and build speeds alongside the challenges encountered, such as dependency type exports and the need for extensive codebase modifications. Ultimately, the experiment revealed the complexities of adopting project references, leading to the decision to postpone full implementation until further TypeScript enhancements are available.
 ---
 

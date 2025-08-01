@@ -6,6 +6,7 @@ tags:
   - code
   - obsidian
 created_at: "2024-09-14"
+published_at: "2024-09-14"
 ---
 
 # Context
