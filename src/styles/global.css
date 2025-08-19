@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
+@plugin "daisyui";
 
 /* ia-writer-duo-latin-400-normal */
 @font-face {

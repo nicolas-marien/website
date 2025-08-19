@@ -1801,6 +1801,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"daisyui@npm:5.0.50":
+  version: 5.0.50
+  resolution: "daisyui@npm:5.0.50"
+  checksum: 10c0/6e752fb803c6e4a1e6b4a628a2d79cc0f2012e93e72f7aa03688ed51c7edd4bed3e370938dca6ee27670b71aff834e310dfd33baa9fa1dfb2502dbfc3f794842
+  languageName: node
+  linkType: hard
+
 "debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.3.4, debug@npm:^4.4.0":
   version: 4.4.0
   resolution: "debug@npm:4.4.0"
@@ -5514,6 +5521,7 @@ __metadata:
     "@tailwindcss/vite": "npm:4.1.2"
     astro: "npm:5.9.3"
     astro-expressive-code: "npm:0.40.2"
+    daisyui: "npm:5.0.50"
     prettier: "npm:3.5.3"
     prettier-plugin-astro: "npm:0.14.1"
     rehype-autolink-headings: "npm:7.1.0"
