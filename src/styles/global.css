@@ -222,3 +222,64 @@
 [data-callout-type='danger'] {
   @apply bg-red-50 border-red-400;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply flex items-center my-6.5 font-semibold;
+
+  &::before {
+    @apply self-start;
+  }
+}
+
+h1 {
+  @apply text-[1.75rem] mt-8;
+
+  &::before {
+    @apply mr-2 content-['#'];
+  }
+}
+
+h2 {
+  @apply text-[1.6rem] mt-12;
+
+  &::before {
+    @apply mr-2 content-['##'];
+  }
+}
+
+h3 {
+  @apply text-2xl mt-10;
+
+  &::before {
+    @apply mr-2 content-['###'];
+  }
+}
+
+h4 {
+  @apply text-2xl mt-8;
+
+  &::before {
+    @apply mr-2 content-['####'];
+  }
+}
+
+h5 {
+  @apply text-lg;
+
+  &::before {
+    @apply mr-2 content-['#####'];
+  }
+}
+
+h6 {
+  @apply text-lg;
+
+  &::before {
+    @apply mr-2 content-['######'];
+  }
+}
