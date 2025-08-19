@@ -394,6 +394,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/ia-writer-duo@npm:5.2.5":
+  version: 5.2.5
+  resolution: "@fontsource/ia-writer-duo@npm:5.2.5"
+  checksum: 10c0/729a1860468b03d58c5f345d8c8c87f8f953f03c162e1443700d6cb36c8d166672f826a062f4aff4ada4c4aa2cce36763322f59f91d000f5f52f2be0e8be86b7
+  languageName: node
+  linkType: hard
+
+"@fontsource/ia-writer-mono@npm:5.2.5":
+  version: 5.2.5
+  resolution: "@fontsource/ia-writer-mono@npm:5.2.5"
+  checksum: 10c0/a99b5ba2c84f0753da8ecbde17a92eda140aaca9c46937488704ab9aacc84c9be16a8ec4423878b679272c25d4abc3bc6b7baed67c968165e842e005dff78abd
+  languageName: node
+  linkType: hard
+
 "@img/sharp-darwin-arm64@npm:0.33.5":
   version: 0.33.5
   resolution: "@img/sharp-darwin-arm64@npm:0.33.5"
@@ -2412,6 +2426,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hast-util-heading-rank@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "hast-util-heading-rank@npm:3.0.0"
+  dependencies:
+    "@types/hast": "npm:^3.0.0"
+  checksum: 10c0/1879c84f629e73f1f13247ab349324355cd801363b44e3d46f763aa5c0ea3b42dcd47b46e5643a0502cf01a6b1fdb9208fd12852e44ca6c671b3e4bccf9369a1
+  languageName: node
+  linkType: hard
+
 "hast-util-is-element@npm:^3.0.0":
   version: 3.0.0
   resolution: "hast-util-is-element@npm:3.0.0"
@@ -4342,6 +4365,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rehype-autolink-headings@npm:7.1.0":
+  version: 7.1.0
+  resolution: "rehype-autolink-headings@npm:7.1.0"
+  dependencies:
+    "@types/hast": "npm:^3.0.0"
+    "@ungap/structured-clone": "npm:^1.0.0"
+    hast-util-heading-rank: "npm:^3.0.0"
+    hast-util-is-element: "npm:^3.0.0"
+    unified: "npm:^11.0.0"
+    unist-util-visit: "npm:^5.0.0"
+  checksum: 10c0/3d6653047c83cf7f9455bc0f5483a40170aee211cc057b7541b491d31e54b08fda72ab5ec4caeacea63e8af130584f0e14d5c63f6ddb86b7f34584b9e3f92dcf
+  languageName: node
+  linkType: hard
+
 "rehype-expressive-code@npm:^0.40.2":
   version: 0.40.2
   resolution: "rehype-expressive-code@npm:0.40.2"
@@ -5470,6 +5507,8 @@ __metadata:
   dependencies:
     "@astrojs/mdx": "npm:4.3.0"
     "@astrojs/rss": "npm:4.0.12"
+    "@fontsource/ia-writer-duo": "npm:5.2.5"
+    "@fontsource/ia-writer-mono": "npm:5.2.5"
     "@r4ai/remark-callout": "npm:0.6.2"
     "@tailwindcss/typography": "npm:0.5.16"
     "@tailwindcss/vite": "npm:4.1.2"
@@ -5477,6 +5516,7 @@ __metadata:
     astro-expressive-code: "npm:0.40.2"
     prettier: "npm:3.5.3"
     prettier-plugin-astro: "npm:0.14.1"
+    rehype-autolink-headings: "npm:7.1.0"
     tailwindcss: "npm:^4.1.2"
   languageName: unknown
   linkType: soft

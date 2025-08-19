@@ -11,6 +11,8 @@
   "dependencies": {
     "@astrojs/mdx": "4.3.0",
     "@astrojs/rss": "4.0.12",
+    "@fontsource/ia-writer-duo": "5.2.5",
+    "@fontsource/ia-writer-mono": "5.2.5",
     "@r4ai/remark-callout": "0.6.2",
     "@tailwindcss/typography": "0.5.16",
     "@tailwindcss/vite": "4.1.2",
@@ -21,6 +23,7 @@
   "packageManager": "yarn@4.6.0",
   "devDependencies": {
     "prettier": "3.5.3",
-    "prettier-plugin-astro": "0.14.1"
+    "prettier-plugin-astro": "0.14.1",
+    "rehype-autolink-headings": "7.1.0"
   }
 }
