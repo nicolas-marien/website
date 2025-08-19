@@ -80,7 +80,11 @@ h6 {
 h1 {
   @apply text-[1.75rem] mt-8;
 
-  &::before {
+  &:is(.post-title) {
+    @apply text-[2rem];
+  }
+
+  &:not(.post-title)::before {
     @apply mr-2 content-['#'];
   }
 }
