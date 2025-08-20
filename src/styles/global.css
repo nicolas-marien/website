@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes:
+    lofi --default,
+    night --prefersdark;
+}
 
 /* ia-writer-duo-latin-400-normal */
 @font-face {
