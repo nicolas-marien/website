@@ -394,6 +394,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/ia-writer-duo@npm:5.2.5":
+  version: 5.2.5
+  resolution: "@fontsource/ia-writer-duo@npm:5.2.5"
+  checksum: 10c0/729a1860468b03d58c5f345d8c8c87f8f953f03c162e1443700d6cb36c8d166672f826a062f4aff4ada4c4aa2cce36763322f59f91d000f5f52f2be0e8be86b7
+  languageName: node
+  linkType: hard
+
+"@fontsource/ia-writer-mono@npm:5.2.5":
+  version: 5.2.5
+  resolution: "@fontsource/ia-writer-mono@npm:5.2.5"
+  checksum: 10c0/a99b5ba2c84f0753da8ecbde17a92eda140aaca9c46937488704ab9aacc84c9be16a8ec4423878b679272c25d4abc3bc6b7baed67c968165e842e005dff78abd
+  languageName: node
+  linkType: hard
+
 "@img/sharp-darwin-arm64@npm:0.33.5":
   version: 0.33.5
   resolution: "@img/sharp-darwin-arm64@npm:0.33.5"
@@ -1787,6 +1801,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"daisyui@npm:5.0.50":
+  version: 5.0.50
+  resolution: "daisyui@npm:5.0.50"
+  checksum: 10c0/6e752fb803c6e4a1e6b4a628a2d79cc0f2012e93e72f7aa03688ed51c7edd4bed3e370938dca6ee27670b71aff834e310dfd33baa9fa1dfb2502dbfc3f794842
+  languageName: node
+  linkType: hard
+
 "debug@npm:4, debug@npm:^4.0.0, debug@npm:^4.3.4, debug@npm:^4.4.0":
   version: 4.4.0
   resolution: "debug@npm:4.4.0"
@@ -2373,6 +2394,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hast-util-from-dom@npm:^5.0.0":
+  version: 5.0.1
+  resolution: "hast-util-from-dom@npm:5.0.1"
+  dependencies:
+    "@types/hast": "npm:^3.0.0"
+    hastscript: "npm:^9.0.0"
+    web-namespaces: "npm:^2.0.0"
+  checksum: 10c0/9a90381e048107a093a3da758bb17b67aaf5322e222f02497f841c4990abf94aa177d38d5b9bf61ad07b3601d0409f34f5b556d89578cc189230c6b994d2af77
+  languageName: node
+  linkType: hard
+
+"hast-util-from-html-isomorphic@npm:2.0.0":
+  version: 2.0.0
+  resolution: "hast-util-from-html-isomorphic@npm:2.0.0"
+  dependencies:
+    "@types/hast": "npm:^3.0.0"
+    hast-util-from-dom: "npm:^5.0.0"
+    hast-util-from-html: "npm:^2.0.0"
+    unist-util-remove-position: "npm:^5.0.0"
+  checksum: 10c0/fc68d9245e794483a802d5c85a9f6c25959e00db78cc796411efc965134f3206f9cc9fa38134572ea781ad74663e801f1f83202007b208e27a770855566a62b6
+  languageName: node
+  linkType: hard
+
 "hast-util-from-html@npm:^2.0.0, hast-util-from-html@npm:^2.0.3":
   version: 2.0.3
   resolution: "hast-util-from-html@npm:2.0.3"
@@ -2409,6 +2453,15 @@ __metadata:
   dependencies:
     "@types/hast": "npm:^3.0.0"
   checksum: 10c0/6e2c0e22ca893c6ebb60f8390e184c4deb041c36d09796756f02cd121c1789c0f5c862ed06caea8f1a80ea8c0ef6a7854dd57946c2eebb76488727bd4a1c952e
+  languageName: node
+  linkType: hard
+
+"hast-util-heading-rank@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "hast-util-heading-rank@npm:3.0.0"
+  dependencies:
+    "@types/hast": "npm:^3.0.0"
+  checksum: 10c0/1879c84f629e73f1f13247ab349324355cd801363b44e3d46f763aa5c0ea3b42dcd47b46e5643a0502cf01a6b1fdb9208fd12852e44ca6c671b3e4bccf9369a1
   languageName: node
   linkType: hard
 
@@ -4342,6 +4395,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rehype-autolink-headings@npm:7.1.0":
+  version: 7.1.0
+  resolution: "rehype-autolink-headings@npm:7.1.0"
+  dependencies:
+    "@types/hast": "npm:^3.0.0"
+    "@ungap/structured-clone": "npm:^1.0.0"
+    hast-util-heading-rank: "npm:^3.0.0"
+    hast-util-is-element: "npm:^3.0.0"
+    unified: "npm:^11.0.0"
+    unist-util-visit: "npm:^5.0.0"
+  checksum: 10c0/3d6653047c83cf7f9455bc0f5483a40170aee211cc057b7541b491d31e54b08fda72ab5ec4caeacea63e8af130584f0e14d5c63f6ddb86b7f34584b9e3f92dcf
+  languageName: node
+  linkType: hard
+
 "rehype-expressive-code@npm:^0.40.2":
   version: 0.40.2
   resolution: "rehype-expressive-code@npm:0.40.2"
@@ -5470,13 +5537,18 @@ __metadata:
   dependencies:
     "@astrojs/mdx": "npm:4.3.0"
     "@astrojs/rss": "npm:4.0.12"
+    "@fontsource/ia-writer-duo": "npm:5.2.5"
+    "@fontsource/ia-writer-mono": "npm:5.2.5"
     "@r4ai/remark-callout": "npm:0.6.2"
     "@tailwindcss/typography": "npm:0.5.16"
     "@tailwindcss/vite": "npm:4.1.2"
     astro: "npm:5.9.3"
     astro-expressive-code: "npm:0.40.2"
+    daisyui: "npm:5.0.50"
+    hast-util-from-html-isomorphic: "npm:2.0.0"
     prettier: "npm:3.5.3"
     prettier-plugin-astro: "npm:0.14.1"
+    rehype-autolink-headings: "npm:7.1.0"
     tailwindcss: "npm:^4.1.2"
   languageName: unknown
   linkType: soft

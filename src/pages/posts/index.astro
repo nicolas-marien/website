@@ -1,13 +1,15 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PostLink from '../components/post-link.astro';
+import Layout from '../../layouts/Layout.astro';
+import PostLink from '../../components/post-link.astro';
+
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 let posts: CollectionEntry<'blog'>[] = await getCollection('blog');
 posts = posts
   .filter((p) => !p.data.draft)
   .sort(
-    (a, b) => new Date(b.data.published_at).getTime() - new Date(a.data.published_at).getTime(),
+    (a, b) =>
+      new Date(b.data.published_at).getTime() - new Date(a.data.published_at).getTime(),
   );
 ---
 

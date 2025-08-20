@@ -8,17 +8,9 @@ const hasTags = !!tags.length;
 ---
 
 <section class="mt-8 pb-24">
-  <a href="/blog" class="block uppercase font-bold text-base-800 pb-8">⬅️ Back</a>
   <div>
-    <h1 class="text-4xl font-bold flex items-center">
-      <span>{title}</span>
-      {
-        draft && (
-          <span class="ml-4 text-sm px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded-full shadow-sm">
-            draft
-          </span>
-        )
-      }
+    <h1 class="post-title inline">
+      {title}
     </h1>
     {
       hasTags && (
@@ -26,6 +18,8 @@ const hasTags = !!tags.length;
           {tags.map((tag) => (
             <Tag>{tag}</Tag>
           ))}
+
+          {draft && <span class="badge badge-sm badge-outline badge-warning">draft</span>}
         </div>
       )
     }
