@@ -36,31 +36,31 @@ code {
 /* callouts.css */
 
 [data-callout] {
-  @apply relative border-l-4 rounded p-4 pl-10 mb-8;
+  @apply relative rounded p-4 pl-10 mb-8;
 }
 
 [data-callout-title] {
-  @apply font-semibold mb-1;
+  @apply font-extrabold mb-1;
 }
 
 [data-callout-body] {
-  @apply text-sm text-gray-700;
+  @apply text-sm;
 }
 
 [data-callout-type='note'] {
-  @apply bg-blue-50 border-blue-300;
+  @apply bg-info text-info-content;
 }
 
 [data-callout-type='tip'] {
-  @apply bg-cyan-50 border-cyan-300;
+  @apply bg-success text-success-content;
 }
 
 [data-callout-type='warning'] {
-  @apply bg-yellow-50 border-yellow-400;
+  @apply bg-warning text-warning-content;
 }
 
 [data-callout-type='danger'] {
-  @apply bg-red-50 border-red-400;
+  @apply bg-error text-error-content;
 }
 
 h1,
