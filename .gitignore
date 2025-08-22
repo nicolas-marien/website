@@ -32,3 +32,11 @@ pnpm-debug.log*
 !.yarn/versions
 .pnp.*
 
+# obsidian
+.obsidian/appearance.json
+.obsidian/hotkeys.json
+.obsidian/workspace.json
+.obsidian/themes
+.obsidian/plugins
+.obsidian/community-plugins.json
+.obsidian/core-plugins-migration.json

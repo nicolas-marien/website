@@ -1,0 +1,9 @@
+{
+  "propertiesInDocument": "source",
+  "showLineNumber": true,
+  "vimMode": true,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "src/blog",
+  "uriCallbacks": true,
+  "promptDelete": false
+}
