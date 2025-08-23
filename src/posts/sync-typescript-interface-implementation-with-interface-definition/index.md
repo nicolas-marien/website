@@ -6,6 +6,9 @@ tags: ['typescript', 'nx']
 created_at: '2025-08-21'
 published_at:
 abstract: CHANGE_ME
+coverImage:
+  url: ./cover.jpg
+  alt: waves in sync
 ---
 
 In one of the teams I work with, a small issue recently arose with our domain event definition files.
@@ -17,12 +20,12 @@ One day, we had to include a new attribute in a couple of events, so we added it
 However, we missed a step: the interface definitions!
 The field was not visible to our consumers 🤦‍♂️
 
-Take the following interface: 
+Take the following interface:
 
 ```typescript
 // event.interface.ts
 interface IEvent {
-	field: string
+  field: string;
 }
 ```
 
@@ -31,8 +34,8 @@ And the implementation:
 ```typescript
 // event.implementation.ts
 class Event implements IEvent {
-	field: string
-	anotherField: number
+  field: string;
+  anotherField: number;
 }
 ```
 
@@ -52,12 +55,9 @@ First, we collect all properties from each interface. Then, we find the classes 
 ```typescript
 const interfacesProperties = new Map<string, Set<string>>();
 for await (const file of interfaceGlobs) {
-  const fileContent = await fs.readFile(file, { encoding: "utf-8" });
+  const fileContent = await fs.readFile(file, { encoding: 'utf-8' });
   const tree = ast(fileContent);
-  const interfaceDeclarations = query(
-    tree,
-    "InterfaceDeclaration > Identifier[name]"
-  );
+  const interfaceDeclarations = query(tree, 'InterfaceDeclaration > Identifier[name]');
 
   if (!interfaceDeclarations.length) {
     continue;
@@ -67,12 +67,12 @@ for await (const file of interfaceGlobs) {
     const interfaceName = interfaceDeclaration.text;
     const interfaceProperties = query(
       tree,
-      `:has(InterfaceDeclaration > Identifier[name=${interfaceName}]) > PropertySignature`
+      `:has(InterfaceDeclaration > Identifier[name=${interfaceName}]) > PropertySignature`,
     );
 
     interfacesProperties.set(
       interfaceName,
-      new Set(interfaceProperties.map((node) => node.name.text))
+      new Set(interfaceProperties.map((node) => node.name.text)),
     );
   }
 }
@@ -82,15 +82,15 @@ for await (const file of interfaceGlobs) {
 
 ```typescript
 for await (const file of implentationGlobs) {
-  const fileContent = await fs.readFile(file, { encoding: "utf-8" });
+  const fileContent = await fs.readFile(file, { encoding: 'utf-8' });
   const tree = ast(fileContent);
 
-  const classDeclarations = query(tree, "ClassDeclaration");
+  const classDeclarations = query(tree, 'ClassDeclaration');
 
   for (const classDeclaration of classDeclarations) {
     const heritageClauses = query(
       classDeclaration,
-      "HeritageClause ExpressionWithTypeArguments Identifier[name]"
+      'HeritageClause ExpressionWithTypeArguments Identifier[name]',
     );
 
     const classOrInterface = heritageClauses.map((node) => node.text);
@@ -101,13 +101,8 @@ for await (const file of implentationGlobs) {
         continue;
       }
 
-      const classOrInterfaceProperties = query(
-        classDeclaration,
-        "PropertyDeclaration"
-      );
-      const properties = new Set(
-        classOrInterfaceProperties.map((node) => node.name.text)
-      );
+      const classOrInterfaceProperties = query(classDeclaration, 'PropertyDeclaration');
+      const properties = new Set(classOrInterfaceProperties.map((node) => node.name.text));
 
       const differences = properties.difference(interfacesMapping.get(name));
 
@@ -117,14 +112,13 @@ for await (const file of implentationGlobs) {
     }
   }
 }
-
 ```
 
-Please note that the code is a brute force implementation (not 100% type-safe as it is), and I am sure that the queries used could be improved. 
+Please note that the code is a brute force implementation (not 100% type-safe as it is), and I am sure that the queries used could be improved.
 
 > [!warning]
 > For this solution to be as effective as possible, all non-primitive nested fields in the implementation must `implements` an interface.
- 
+
 ## Fixability?
 
 We wondered if we could take this solution further by automatically fixing mistakes when they're detected. The `nx conformance` tool lets us run a generator to fix violations, which could be a useful addition.

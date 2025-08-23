@@ -1,14 +1,26 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Tag from '../components/tag.astro';
+import { Image } from 'astro:assets';
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, tags, draft } = Astro.props as Props;
+const { title, tags, draft, coverImage } = Astro.props as Props;
 const hasTags = !!tags.length;
 ---
 
 <section class="mt-8 pb-24">
   <div>
+    {
+      coverImage && (
+        <Image
+          src={coverImage.url}
+          alt={coverImage.alt}
+          priority
+          layout="constrained"
+          class="w-full rounded-xl mb-5"
+        />
+      )
+    }
     <h1 class="post-title inline">
       {title}
     </h1>
