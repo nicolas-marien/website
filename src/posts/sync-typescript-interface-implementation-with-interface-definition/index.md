@@ -53,11 +53,22 @@ First, we collect all properties from each interface. Then, we find the classes 
 ## Interface property collection
 
 ```typescript
+import type {
+  ClassDeclaration,
+  Identifier,
+  PropertyDeclaration,
+  PropertySignature,
+} from "typescript";
+
 const interfacesProperties = new Map<string, Set<string>>();
-for await (const file of interfaceGlobs) {
-  const fileContent = await fs.readFile(file, { encoding: 'utf-8' });
-  const tree = ast(fileContent);
-  const interfaceDeclarations = query(tree, 'InterfaceDeclaration > Identifier[name]');
+
+for await (const path of interfacesPaths) {
+  const content = await fs.readFile(path, { encoding: "utf-8" });
+  const tree = ast(content);
+  const interfaceDeclarations = query<Identifier>(
+    tree,
+    "InterfaceDeclaration > Identifier[name]"
+  );
 
   if (!interfaceDeclarations.length) {
     continue;
@@ -65,53 +76,61 @@ for await (const file of interfaceGlobs) {
 
   for (const interfaceDeclaration of interfaceDeclarations) {
     const interfaceName = interfaceDeclaration.text;
-    const interfaceProperties = query(
+    const interfaceProperties = query<PropertySignature>(
       tree,
-      `:has(InterfaceDeclaration > Identifier[name=${interfaceName}]) > PropertySignature`,
+      `:has(InterfaceDeclaration > Identifier[name=${interfaceName}]) > PropertySignature`
     );
 
     interfacesProperties.set(
       interfaceName,
-      new Set(interfaceProperties.map((node) => node.name.text)),
+      new Set(interfaceProperties.map((node) => (node.name as Identifier).text))
     );
   }
 }
+
+
 ```
 
 ## Implementation property collection
 
 ```typescript
-for await (const file of implentationGlobs) {
-  const fileContent = await fs.readFile(file, { encoding: 'utf-8' });
-  const tree = ast(fileContent);
 
-  const classDeclarations = query(tree, 'ClassDeclaration');
+for await (const path of eventsPaths) {
+  const file = await fs.readFile(path, { encoding: "utf-8" });
+  const tree = ast(file);
+
+  const classDeclarations = query<ClassDeclaration>(tree, "ClassDeclaration");
 
   for (const classDeclaration of classDeclarations) {
-    const heritageClauses = query(
+    const heritageClauses = query<Identifier>(
       classDeclaration,
-      'HeritageClause ExpressionWithTypeArguments Identifier[name]',
+      "HeritageClause ExpressionWithTypeArguments Identifier[name]"
     );
 
-    const classOrInterface = heritageClauses.map((node) => node.text);
+    const classOrInterfaceNames = heritageClauses.map((node) => node.text);
 
-    for (const name of classOrInterface) {
-      // NOTE: HeritageClause also catches class inheritance
-      if (!interfacesMapping.has(name)) {
+    for (const name of classOrInterfaceNames) {
+      if (!interfacesProperties.has(name)) {
         continue;
       }
 
-      const classOrInterfaceProperties = query(classDeclaration, 'PropertyDeclaration');
-      const properties = new Set(classOrInterfaceProperties.map((node) => node.name.text));
+      const classOrInterfaceProperties = query<PropertyDeclaration>(
+        classDeclaration,
+        "PropertyDeclaration"
+      );
+      const properties = new Set(
+        classOrInterfaceProperties.map((node) => (node.name as Identifier).text)
+      );
 
-      const differences = properties.difference(interfacesMapping.get(name));
+      const differences = properties.difference(interfacesMapping.get(name)!);
 
       if (differences.size > 0) {
-        // report the error either somehow
+       // Report the issue somewhere
       }
     }
   }
 }
+
 ```
 
 Please note that the code is a brute force implementation (not 100% type-safe as it is), and I am sure that the queries used could be improved.
