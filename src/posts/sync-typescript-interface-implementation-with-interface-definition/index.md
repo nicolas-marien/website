@@ -7,7 +7,7 @@ tags:
   - nx
 created_at: '2025-08-21'
 published_at: '2025-08-26'
-abstract: CHANGE_ME
+abstract: Keep interface implementation in sync with the definition
 coverImage:
   url: ./cover.jpg
   alt: waves in sync
