@@ -74,15 +74,16 @@ h6 {
   &::before {
     @apply self-start;
   }
+
   .heading-anchor {
     @apply opacity-0 inline-block ml-3 transition-opacity;
   }
 
-  &:hover {
+  &:not(.post-title):hover {
     text-decoration: underline;
     cursor: pointer;
   }
-  &:hover .heading-anchor {
+  &:not(.post-title):hover .heading-anchor {
     @apply !opacity-80;
   }
 }
