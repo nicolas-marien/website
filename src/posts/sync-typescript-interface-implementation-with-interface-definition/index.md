@@ -1,10 +1,12 @@
 ---
 title: Sync TypeScript interface implementation with interface definition
-draft: true
+draft: false
 slug: sync-typescript-interface-implementation-with-interface-definition
-tags: ['typescript', 'nx']
-created_at: '2025-08-21'
-published_at:
+tags:
+  - typescript
+  - nx
+created_at: 2025-08-21
+published_at: 2025-08-26
 abstract: CHANGE_ME
 coverImage:
   url: ./cover.jpg
