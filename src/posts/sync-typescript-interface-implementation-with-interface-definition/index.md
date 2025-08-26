@@ -5,8 +5,8 @@ slug: sync-typescript-interface-implementation-with-interface-definition
 tags:
   - typescript
   - nx
-created_at: 2025-08-21
-published_at: 2025-08-26
+created_at: '2025-08-21'
+published_at: '2025-08-26'
 abstract: CHANGE_ME
 coverImage:
   url: ./cover.jpg
@@ -60,16 +60,16 @@ import type {
   Identifier,
   PropertyDeclaration,
   PropertySignature,
-} from "typescript";
+} from 'typescript';
 
 const interfacesProperties = new Map<string, Set<string>>();
 
 for await (const path of interfacesPaths) {
-  const content = await fs.readFile(path, { encoding: "utf-8" });
+  const content = await fs.readFile(path, { encoding: 'utf-8' });
   const tree = ast(content);
   const interfaceDeclarations = query<Identifier>(
     tree,
-    "InterfaceDeclaration > Identifier[name]"
+    'InterfaceDeclaration > Identifier[name]',
   );
 
   if (!interfaceDeclarations.length) {
@@ -80,33 +80,30 @@ for await (const path of interfacesPaths) {
     const interfaceName = interfaceDeclaration.text;
     const interfaceProperties = query<PropertySignature>(
       tree,
-      `:has(InterfaceDeclaration > Identifier[name=${interfaceName}]) > PropertySignature`
+      `:has(InterfaceDeclaration > Identifier[name=${interfaceName}]) > PropertySignature`,
     );
 
     interfacesProperties.set(
       interfaceName,
-      new Set(interfaceProperties.map((node) => (node.name as Identifier).text))
+      new Set(interfaceProperties.map((node) => (node.name as Identifier).text)),
     );
   }
 }
-
-
 ```
 
 ## Implementation property collection
 
 ```typescript
-
 for await (const path of eventsPaths) {
-  const file = await fs.readFile(path, { encoding: "utf-8" });
+  const file = await fs.readFile(path, { encoding: 'utf-8' });
   const tree = ast(file);
 
-  const classDeclarations = query<ClassDeclaration>(tree, "ClassDeclaration");
+  const classDeclarations = query<ClassDeclaration>(tree, 'ClassDeclaration');
 
   for (const classDeclaration of classDeclarations) {
     const heritageClauses = query<Identifier>(
       classDeclaration,
-      "HeritageClause ExpressionWithTypeArguments Identifier[name]"
+      'HeritageClause ExpressionWithTypeArguments Identifier[name]',
     );
 
     const classOrInterfaceNames = heritageClauses.map((node) => node.text);
@@ -118,21 +115,20 @@ for await (const path of eventsPaths) {
 
       const classOrInterfaceProperties = query<PropertyDeclaration>(
         classDeclaration,
-        "PropertyDeclaration"
+        'PropertyDeclaration',
       );
       const properties = new Set(
-        classOrInterfaceProperties.map((node) => (node.name as Identifier).text)
+        classOrInterfaceProperties.map((node) => (node.name as Identifier).text),
       );
 
       const differences = properties.difference(interfacesMapping.get(name)!);
 
       if (differences.size > 0) {
-       // Report the issue somewhere
+        // Report the issue somewhere
       }
     }
   }
 }
-
 ```
 
 Please note that the code is a brute force implementation (not 100% type-safe as it is), and I am sure that the queries used could be improved.
