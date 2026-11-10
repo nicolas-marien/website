@@ -13,13 +13,13 @@ const { noindex = false } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="lofi">
+<html lang="en">
   <head>
     <script is:inline>
-      if (localStorage.getItem('theme') === null) {
-        document.documentElement.setAttribute('data-theme', 'lofi');
-      } else {
-        document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
+      {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = localStorage.getItem('theme') ?? (prefersDark ? 'night' : 'lofi');
+        document.documentElement.setAttribute('data-theme', theme);
       }
     </script>
     <meta charset="UTF-8" />
