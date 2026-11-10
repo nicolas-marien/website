@@ -15,7 +15,7 @@ const { Content } = await render(post);
 const title = `Nicolas Narien - ${post.data.title}`;
 ---
 
-<Layout title={title}>
+<Layout title={title} noindex={post.data.draft}>
   <BlogPost {...post.data}>
     <Content />
   </BlogPost>
