@@ -15,6 +15,9 @@ const blog = defineCollection({
       url: image(),
       alt: z.string()
     }).optional()
+  }).refine((post) => post.draft || !!post.published_at, {
+    message: 'published_at is required when draft is false',
+    path: ['published_at'],
   }),
 });
 

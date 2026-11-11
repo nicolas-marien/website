@@ -18,7 +18,7 @@ const formatter = new Intl.DateTimeFormat(undefined, {
 
 <div class="flex flex-col gap-2 my-10">
   <a href={`/posts/${id}`} class="text-2xl font-bold block">{title}</a>
-  <time datetime={published_at} class="block text-base-600">
+  <time datetime={published_at} class="block text-base-content/60">
     {formatter.format(createAtDate)}
   </time>
   <div class="my-4">{abstract}</div>

@@ -6,27 +6,6 @@
     night --prefersdark;
 }
 
-/* ia-writer-duo-latin-400-normal */
-@font-face {
-  font-family: 'iA Writer Duo';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src:
-    url(@fontsource/ia-writer-duo/files/ia-writer-duo-latin-400-normal.woff2) format('woff2'),
-    url(@fontsource/ia-writer-duo/files/ia-writer-duo-latin-400-normal.woff) format('woff');
-}
-/* ia-writer-mono-latin-400-normal */
-@font-face {
-  font-family: 'iA Writer Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src:
-    url(@fontsource/ia-writer-mono/files/ia-writer-mono-latin-400-normal.woff2) format('woff2'),
-    url(@fontsource/ia-writer-mono/files/ia-writer-mono-latin-400-normal.woff) format('woff');
-}
-
 body {
   font-family: 'iA Writer Duo', monospace;
 }

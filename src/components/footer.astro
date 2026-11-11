@@ -1,4 +1,4 @@
-<footer class="footer sm:footer-horizontal bg-base-100 text-content items-center p-4">
+<footer class="footer sm:footer-horizontal bg-base-100 text-base-content items-center p-4">
   <aside class="grid-flow-col items-center">
     <p>Nicolas Marien &middot; {new Date().getFullYear()}</p>
   </aside>
@@ -112,13 +112,9 @@
 <script>
   const toggle: HTMLInputElement | null = document.querySelector('.theme-controller');
   if (toggle) {
-    const currentTheme = localStorage.getItem('theme') ?? 'lofi';
-    if (currentTheme === 'night') {
-      toggle.checked = true;
-    }
+    toggle.checked = document.documentElement.getAttribute('data-theme') === 'night';
     toggle.addEventListener('change', () => {
-      const currentTheme = localStorage.getItem('theme') ?? 'lofi';
-      const newTheme = currentTheme === 'lofi' ? 'night' : 'lofi';
+      const newTheme = toggle.checked ? 'night' : 'lofi';
 
       document.documentElement.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);

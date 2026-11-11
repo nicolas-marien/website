@@ -25,7 +25,7 @@ const hasTags = !!tags.length;
       {title}
     </h1>
     {
-      hasTags && (
+      (hasTags || draft) && (
         <div class="flex gap-3 mb-8 mt-4">
           {tags.map((tag) => (
             <Tag>{tag}</Tag>
