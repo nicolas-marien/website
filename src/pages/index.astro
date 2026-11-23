@@ -1,35 +1,103 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { type CollectionEntry, getCollection } from 'astro:content';
-import PostLink from '../components/post-link.astro';
+import PostList from '../components/post-list.astro';
+import { formatDate, getPublishedPosts } from '../lib/posts';
 
-const posts: CollectionEntry<'blog'>[] = await getCollection('blog');
-const recentPosts = posts
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => {
-    return new Date(b.data.published_at).getTime() - new Date(a.data.published_at).getTime();
-  })
-  .slice(0, 2);
+const [latest, ...older] = await getPublishedPosts();
 ---
 
 <Layout>
-  <div class="w-full">
-    <p class="py-6">
-      Software Engineer @ <a href="http://payfit.com/">PayFit</a>, trying to survive two kids
-      and a cat
-    </p>
-  </div>
-  <p class="font-bold text-2xl uppercase">Recent publications</p>
-  <div>
-    {
-      recentPosts.map((post) => (
-        <PostLink
-          id={post.id}
-          title={post.data.title}
-          abstract={post.data.abstract}
-          published_at={post.data.published_at}
-        />
-      ))
-    }
-  </div>
+  <p class="intro">
+    Software engineer at <a href="https://payfit.com/">PayFit</a>, Nx Certified Expert.
+    <em>These notes get written after bedtime</em>, once two kids and a cat have finally agreed
+    to sleep. Mostly TypeScript, monorepos and the tools around them.
+  </p>
+
+  {
+    latest && (
+      <section class="lit">
+        <small>Latest, {formatDate(latest.data.published_at!)}</small>
+        <a href={`/posts/${latest.id}`}>{latest.data.title}</a>
+        <p>{latest.data.abstract}</p>
+      </section>
+    )
+  }
+
+  <PostList posts={older.slice(0, 4)} fade />
+  {
+    older.length > 4 && (
+      <a class="all" href="/posts">
+        All writing
+      </a>
+    )
+  }
 </Layout>
+
+<style>
+  .intro {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    max-width: 31em;
+    color: var(--dim);
+    margin: 0 0 2.5rem;
+  }
+
+  .intro em {
+    color: var(--text);
+  }
+
+  .intro a {
+    color: inherit;
+    text-underline-offset: 3px;
+  }
+
+  .lit {
+    max-width: 33em;
+    margin-bottom: 3rem;
+  }
+
+  .lit small {
+    font-size: 0.875rem;
+    font-style: italic;
+    color: var(--lamp);
+  }
+
+  .lit a {
+    display: block;
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    text-decoration: none;
+    margin: 0.4rem 0 0.75rem;
+  }
+
+  .lit a:hover,
+  .lit a:focus-visible {
+    text-decoration: underline;
+    text-decoration-color: var(--lamp);
+    text-underline-offset: 5px;
+  }
+
+  .lit p {
+    font-size: 1.03rem;
+    line-height: 1.75;
+    margin: 0;
+    color: var(--body);
+  }
+
+  .all {
+    display: inline-block;
+    margin-top: 1.25rem;
+    color: var(--text);
+    text-decoration-color: var(--lamp);
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 560px) {
+    .lit a {
+      font-size: 1.55rem;
+    }
+  }
+</style>

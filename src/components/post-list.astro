@@ -1,0 +1,79 @@
+---
+import { formatMonth, type Post } from '../lib/posts';
+
+interface Props {
+  posts: Post[];
+  /** Older posts fade further into the dark, like the edge of the lamplight. */
+  fade?: boolean;
+}
+
+const { posts, fade = false } = Astro.props;
+---
+
+<ul class:list={{ fade }}>
+  {
+    posts.map((post) => (
+      <li>
+        <a href={`/posts/${post.id}`}>
+          {post.data.title}
+          <span>{formatMonth(post.data.published_at!)}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 34em;
+  }
+
+  a {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--rule);
+    color: var(--dim);
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: var(--text);
+  }
+
+  span {
+    white-space: nowrap;
+    font-style: italic;
+    font-size: 0.875rem;
+    padding-top: 0.15em;
+  }
+
+  .fade li:nth-child(2) {
+    opacity: 0.8;
+  }
+
+  .fade li:nth-child(3) {
+    opacity: 0.6;
+  }
+
+  .fade li:nth-child(n + 4) {
+    opacity: 0.45;
+  }
+
+  .fade li:hover,
+  .fade li:focus-within {
+    opacity: 1;
+  }
+
+  @media (max-width: 560px) {
+    a {
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+  }
+</style>

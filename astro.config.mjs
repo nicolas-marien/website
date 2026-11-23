@@ -1,27 +1,51 @@
 // @ts-check
-import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
+import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic';
 import { defineConfig } from 'astro/config';
 import remarkCallout from '@r4ai/remark-callout';
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import mdx from '@astrojs/mdx';
 
 import tailwindcss from '@tailwindcss/vite';
 
 import expressiveCode from 'astro-expressive-code';
+import { bedtimeDay, bedtimeNight } from './code-themes.mjs';
 
 export default defineConfig({
   site: 'https://nicolasmarien.dev',
   integrations: [
     expressiveCode({
-      themes: ['kanagawa-wave'],
+      themes: [bedtimeNight, bedtimeDay],
+      useDarkModeMediaQuery: false,
+      themeCssSelector: (theme) =>
+        `[data-theme='${theme.name === 'bedtime-day' ? 'day' : 'night'}']`,
+      styleOverrides: {
+        codeFontFamily: "'iA Writer Mono', monospace",
+        uiFontFamily: "'Literata', serif",
+        codeFontSize: '0.8rem',
+        codeLineHeight: '1.65',
+        borderRadius: '8px',
+        borderColor: 'transparent',
+        frames: {
+          frameBoxShadowCssValue: 'none',
+          editorTabBarBackground: 'var(--code)',
+          editorTabBarBorderBottomColor: 'transparent',
+          editorActiveTabBackground: 'var(--code)',
+          editorActiveTabForeground: 'var(--dim)',
+          editorActiveTabIndicatorTopColor: 'transparent',
+          editorActiveTabIndicatorBottomColor: 'transparent',
+          terminalTitlebarBackground: 'var(--code)',
+          terminalTitlebarBorderBottomColor: 'transparent',
+        },
+      },
     }),
     mdx(),
   ],
 
   markdown: {
     remarkPlugins: [remarkCallout],
-    rehypePlugins: [rehypeHeadingIds,
+    rehypePlugins: [
+      rehypeHeadingIds,
       [
         rehypeAutolinkHeadings,
         {
@@ -35,7 +59,7 @@ export default defineConfig({
           ).children,
         },
       ],
-    ]
+    ],
   },
 
   vite: {

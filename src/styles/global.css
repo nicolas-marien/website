@@ -1,139 +1,193 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
-@plugin "daisyui" {
-  themes:
-    lofi --default,
-    night --prefersdark;
+
+/*
+ * Bedtime theme: the site is a room after the kids are asleep.
+ * `night` is lit by a single lamp, `day` is the lights-on version.
+ */
+:root,
+[data-theme='night'] {
+  color-scheme: dark;
+  --night: #1c2140;
+  --wall: #262c52;
+  --lamp: #ffd58a;
+  --text: #e7e4f2;
+  --body: #d4d1e6;
+  --dim: #9c9bc0;
+  --rule: rgb(156 155 192 / 0.2);
+  --glow: rgb(255 196 110 / 0.15);
+  --code: #151a36;
+  --cover-opacity: 0.72;
+  --note: #a9c4ff;
+  --tip: #b5e3c4;
+  --danger: #ff9a8f;
+}
+
+[data-theme='day'] {
+  color-scheme: light;
+  --night: #f3f4fa;
+  --wall: #e3e1f0;
+  --lamp: #a8590c;
+  --text: #22223a;
+  --body: #33334d;
+  --dim: #6b6a86;
+  --rule: rgb(60 60 100 / 0.14);
+  --glow: transparent;
+  --code: #e8e9f4;
+  --cover-opacity: 1;
+  --note: #2b55a8;
+  --tip: #2f7a4c;
+  --danger: #b3332b;
+}
+
+html {
+  background: var(--night);
 }
 
 body {
-  font-family: 'iA Writer Duo', monospace;
+  min-height: 100vh;
+  font-family: 'Literata', serif;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse 75% 480px at 30% 230px, var(--glow), transparent 70%) no-repeat,
+    var(--night);
+  transition:
+    background-color 0.5s,
+    color 0.5s;
 }
-code {
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    transition: none;
+  }
+}
+
+code,
+kbd,
+pre {
   font-family: 'iA Writer Mono', monospace;
 }
-/* callouts.css */
 
-[data-callout] {
-  @apply relative rounded p-4 pl-10 mb-8;
+:focus-visible {
+  outline: 2px solid var(--lamp);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
-[data-callout-title] {
-  @apply font-extrabold mb-1;
-}
+/* Long-form reading: Tailwind Typography, tuned to the Bedtime palette. */
+.prose {
+  --tw-prose-body: var(--body);
+  --tw-prose-headings: var(--text);
+  --tw-prose-lead: var(--body);
+  --tw-prose-links: var(--text);
+  --tw-prose-bold: var(--text);
+  --tw-prose-counters: var(--dim);
+  --tw-prose-bullets: var(--dim);
+  --tw-prose-hr: var(--rule);
+  --tw-prose-quotes: var(--body);
+  --tw-prose-quote-borders: var(--lamp);
+  --tw-prose-captions: var(--dim);
+  --tw-prose-code: var(--text);
+  --tw-prose-th-borders: var(--rule);
+  --tw-prose-td-borders: var(--rule);
 
-[data-callout-body] {
-  @apply text-sm;
-}
+  a {
+    text-decoration-color: var(--lamp);
+    text-underline-offset: 3px;
+  }
 
-[data-callout-type='note'] {
-  @apply bg-info text-info-content;
-}
+  :not(pre) > code {
+    font-size: 0.84em;
+    font-weight: 400;
+    background: var(--code);
+    padding: 0.12em 0.38em;
+    border-radius: 4px;
+    white-space: nowrap;
 
-[data-callout-type='tip'] {
-  @apply bg-success text-success-content;
-}
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
 
-[data-callout-type='warning'] {
-  @apply bg-warning text-warning-content;
-}
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    scroll-margin-top: 1.5rem;
+  }
 
-[data-callout-type='danger'] {
-  @apply bg-error text-error-content;
-}
+  /* Posts use `#` for sections (the page title is outside the article), so keep h1 modest. */
+  :where(h1) {
+    font-size: 1.5em;
+    margin: 1.8em 0 0.6em;
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply flex items-center my-6.5 font-semibold;
+  :where(h2) {
+    font-size: 1.3em;
+    margin: 1.7em 0 0.6em;
+  }
 
-  &::before {
-    @apply self-start;
+  :where(h3, h4) {
+    font-size: 1.12em;
   }
 
   .heading-anchor {
-    @apply opacity-0 inline-block ml-3 transition-opacity;
+    display: inline-block;
+    margin-left: 0.4em;
+    color: var(--lamp);
+    opacity: 0;
+    transition: opacity 0.2s;
+    vertical-align: middle;
+
+    svg {
+      width: 0.7em;
+      height: 0.7em;
+    }
   }
 
-  &:not(.post-title):hover {
-    text-decoration: underline;
-    cursor: pointer;
+  :where(h1, h2, h3, h4, h5, h6):hover .heading-anchor,
+  .heading-anchor:focus-visible {
+    opacity: 1;
   }
-  &:not(.post-title):hover .heading-anchor {
-    @apply !opacity-80;
+
+  img {
+    border-radius: 6px;
   }
 }
 
-h1 {
-  @apply text-[1.75rem] mt-8;
-
-  &:is(.post-title) {
-    @apply text-[2rem];
-  }
-
-  &:not(.post-title)::before {
-    @apply mr-2 content-['#'];
-  }
-
-  .heading-anchor svg {
-    @apply size-5.5;
-  }
+/* Callouts (from @r4ai/remark-callout): a lamp-coloured margin note. */
+[data-callout] {
+  --callout: var(--lamp);
+  margin: 1.6em 0;
+  padding: 0.25em 0 0.25em 1.25em;
+  border-left: 3px solid var(--callout);
+  font-size: 0.92em;
 }
 
-h2 {
-  @apply text-[1.6rem] mt-12;
-
-  &::before {
-    @apply mr-2 content-['##'];
-  }
-  .heading-anchor svg {
-    @apply size-5.5;
-  }
+[data-callout-type='note'],
+[data-callout-type='info'] {
+  --callout: var(--note);
 }
 
-h3 {
-  @apply text-2xl mt-10;
-
-  &::before {
-    @apply mr-2 content-['###'];
-  }
-  .heading-anchor svg {
-    @apply size-5.5;
-  }
+[data-callout-type='tip'] {
+  --callout: var(--tip);
 }
 
-h4 {
-  @apply text-2xl mt-8;
-
-  &::before {
-    @apply mr-2 content-['####'];
-  }
-  .heading-anchor svg {
-    @apply size-5.5;
-  }
+[data-callout-type='danger'],
+[data-callout-type='error'] {
+  --callout: var(--danger);
 }
 
-h5 {
-  @apply text-lg;
-
-  &::before {
-    @apply mr-2 content-['#####'];
-  }
-  .heading-anchor svg {
-    @apply size-5.5;
-  }
+[data-callout-title] {
+  font-style: italic;
+  color: var(--callout);
+  margin-bottom: 0.15em;
 }
 
-h6 {
-  @apply text-lg;
+[data-callout-body] > :first-child {
+  margin-top: 0;
+}
 
-  &::before {
-    @apply mr-2 content-['######'];
-  }
-  .heading-anchor svg {
-    @apply size-5.5;
-  }
+[data-callout-body] > :last-child {
+  margin-bottom: 0;
 }
