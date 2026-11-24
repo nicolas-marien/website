@@ -53,21 +53,18 @@ const { posts, fade = false } = Astro.props;
     padding-top: 0.15em;
   }
 
-  .fade li:nth-child(2) {
-    opacity: 0.8;
+  /* Fade with colours that all keep a 4.5:1 contrast, not with opacity. */
+  .fade li:nth-child(2) a {
+    color: var(--fade-2);
   }
 
-  .fade li:nth-child(3) {
-    opacity: 0.6;
+  .fade li:nth-child(n + 3) a {
+    color: var(--fade-3);
   }
 
-  .fade li:nth-child(n + 4) {
-    opacity: 0.45;
-  }
-
-  .fade li:hover,
-  .fade li:focus-within {
-    opacity: 1;
+  .fade li a:hover,
+  .fade li a:focus-visible {
+    color: var(--text);
   }
 
   @media (max-width: 560px) {

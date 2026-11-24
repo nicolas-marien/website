@@ -13,7 +13,10 @@
   --lamp: #ffd58a;
   --text: #e7e4f2;
   --body: #d4d1e6;
-  --dim: #9c9bc0;
+  /* Every text colour stays above 4.5:1, even where the lamp glow is brightest. */
+  --dim: #aeadd0;
+  --fade-2: #a8a7c9;
+  --fade-3: #a3a3c3;
   --rule: rgb(156 155 192 / 0.2);
   --glow: rgb(255 196 110 / 0.15);
   --code: #151a36;
@@ -30,7 +33,9 @@
   --lamp: #a8590c;
   --text: #22223a;
   --body: #33334d;
-  --dim: #6b6a86;
+  --dim: #504f68;
+  --fade-2: #5e5d76;
+  --fade-3: #6a6982;
   --rule: rgb(60 60 100 / 0.14);
   --glow: transparent;
   --code: #e8e9f4;
@@ -66,6 +71,21 @@ code,
 kbd,
 pre {
   font-family: 'iA Writer Mono', monospace;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 10;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  background: var(--wall);
+  color: var(--text);
+
+  &:focus {
+    top: 1rem;
+  }
 }
 
 :focus-visible {
@@ -118,18 +138,18 @@ pre {
     scroll-margin-top: 1.5rem;
   }
 
-  /* Posts use `#` for sections (the page title is outside the article), so keep h1 modest. */
-  :where(h1) {
+  /* Markdown headings are shifted down one level (see astro.config.mjs): `#` renders as h2. */
+  :where(h2) {
     font-size: 1.5em;
     margin: 1.8em 0 0.6em;
   }
 
-  :where(h2) {
+  :where(h3) {
     font-size: 1.3em;
     margin: 1.7em 0 0.6em;
   }
 
-  :where(h3, h4) {
+  :where(h4, h5, h6) {
     font-size: 1.12em;
   }
 

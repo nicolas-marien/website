@@ -44,9 +44,10 @@ const { noindex = false } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <a class="skip-link" href="#content">Skip to content</a>
     <div class="page">
       <Navigation />
-      <main>
+      <main id="content">
         <slot />
       </main>
       <Footer />
