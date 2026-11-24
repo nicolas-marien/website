@@ -1,5 +1,13 @@
+---
+import { Image } from 'astro:assets';
+import badge from '../assets/circle-badge.png';
+---
+
 <nav aria-label="Main">
-  <a class="me" href="/">Nicolas Marien</a>
+  <a class="me" href="/">
+    <Image src={badge} alt="" width={64} height={64} loading="eager" />
+    Nicolas Marien
+  </a>
   <div class="right">
     <a href="/posts">Writing</a>
     <button class="switch" type="button" aria-pressed="false">
@@ -38,10 +46,22 @@
 
   .me {
     font-weight: 600;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     padding: 0.5rem 0;
     color: var(--text);
     text-decoration: none;
+  }
+
+  /* The name is the link text, so the avatar stays decorative (empty alt). */
+  .me img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 2px var(--night),
+      0 0 0 3px color-mix(in srgb, var(--lamp) 55%, transparent);
   }
 
   .right {
