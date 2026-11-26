@@ -15,9 +15,17 @@ const date = published_at ?? created_at;
 const tagList = new Intl.ListFormat('en-GB', { type: 'conjunction' }).format(tags);
 ---
 
+{
+  draft && (
+    <p class="draft">
+      <strong>Draft</strong>
+      <span>Not published yet: this page is only reachable by its link. Thanks for proofreading!</span>
+    </p>
+  )
+}
+
 <header class="col">
   <small>
-    {draft && <span class="draft">Draft, </span>}
     <time datetime={date}>{formatDate(date)}</time>, {readingMinutes(post.body)} minute read
   </small>
   <h1>{title}</h1>
@@ -32,7 +40,7 @@ const tagList = new Intl.ListFormat('en-GB', { type: 'conjunction' }).format(tag
   )
 }
 
-<article class="col prose prose-lg">
+<article class="col prose prose-lg max-w-none">
   <slot />
 </article>
 
@@ -67,8 +75,9 @@ const tagList = new Intl.ListFormat('en-GB', { type: 'conjunction' }).format(tag
 }
 
 <style>
+  /* Header, cover, text and footer share one column, as wide as the page allows. */
   .col {
-    max-width: 34em;
+    max-width: none;
   }
 
   header small {
@@ -78,7 +87,25 @@ const tagList = new Intl.ListFormat('en-GB', { type: 'conjunction' }).format(tag
   }
 
   .draft {
-    font-weight: 600;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    margin: 0 0 2rem;
+    padding: 0.8rem 1rem;
+    border: 1px dashed var(--lamp);
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--lamp) 10%, transparent);
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Darkened a touch so it keeps 4.5:1 on the tinted background in the day theme. */
+  .draft strong {
+    color: color-mix(in srgb, var(--lamp) 75%, var(--text));
+    font-style: italic;
+    font-weight: 700;
   }
 
   h1 {
