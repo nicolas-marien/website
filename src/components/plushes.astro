@@ -1,0 +1,59 @@
+---
+/**
+ * Gurvan Greencloak and Doudou Sith, the kids' plushes. They sleep while the lamp is on
+ * and wake up when the lights go on, so the theme switch shows one pair or the other.
+ * Purely decorative: the intro text already tells the bedtime story.
+ */
+import { Image } from 'astro:assets';
+import gurvanAsleep from '../assets/plushes/gurvan-asleep.png';
+import gurvanAwake from '../assets/plushes/gurvan-awake.png';
+import sithAsleep from '../assets/plushes/doudou-sith-asleep.png';
+import sithAwake from '../assets/plushes/doudou-sith-awake.png';
+
+const size = { height: 74, densities: [1, 2] };
+---
+
+<div class="plushes" aria-hidden="true">
+  <span class="asleep">
+    <Image src={gurvanAsleep} alt="" {...size} />
+    <Image src={sithAsleep} alt="" {...size} />
+  </span>
+  <span class="awake">
+    <Image src={gurvanAwake} alt="" {...size} />
+    <Image src={sithAwake} alt="" {...size} />
+  </span>
+</div>
+
+<style>
+  .plushes {
+    position: absolute;
+    right: 4px;
+    bottom: 100%;
+    /* The sprites have a little transparent room under their feet. */
+    margin-bottom: -6px;
+    pointer-events: none;
+  }
+
+  span {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  img {
+    height: 74px;
+    width: auto;
+  }
+
+  img + img {
+    margin-left: -16px;
+  }
+
+  .awake,
+  :global([data-theme='day']) .asleep {
+    display: none;
+  }
+
+  :global([data-theme='day']) .awake {
+    display: flex;
+  }
+</style>

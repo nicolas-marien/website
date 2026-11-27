@@ -1,42 +1,233 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import Tag from '../components/tag.astro';
 import { Image } from 'astro:assets';
-type Props = CollectionEntry<'blog'>['data'];
+import memoji from '../assets/memoji.jpg';
+import { formatDate, readingMinutes, type Post } from '../lib/posts';
 
-const { title, tags, draft, coverImage } = Astro.props as Props;
-const hasTags = !!tags.length;
+interface Props {
+  post: Post;
+  newer?: Post;
+  older?: Post;
+}
+
+const { post, newer, older } = Astro.props;
+const { title, tags, draft, coverImage, published_at, created_at } = post.data;
+const date = published_at ?? created_at;
+const tagList = new Intl.ListFormat('en-GB', { type: 'conjunction' }).format(tags);
 ---
 
-<section class="mt-8 pb-24">
-  <div>
-    {
-      coverImage && (
-        <Image
-          src={coverImage.url}
-          alt={coverImage.alt}
-          priority
-          layout="constrained"
-          class="w-full rounded-xl mb-5"
-        />
-      )
-    }
-    <h1 class="post-title inline">
-      {title}
-    </h1>
-    {
-      (hasTags || draft) && (
-        <div class="flex gap-3 mb-8 mt-4">
-          {tags.map((tag) => (
-            <Tag>{tag}</Tag>
-          ))}
+{
+  draft && (
+    <p class="draft">
+      <strong>Draft</strong>
+      <span>Not published yet: this page is only reachable by its link. Thanks for proofreading!</span>
+    </p>
+  )
+}
 
-          {draft && <span class="badge badge-sm badge-outline badge-warning">draft</span>}
-        </div>
-      )
+<header class="col">
+  <small>
+    <time datetime={date}>{formatDate(date)}</time>, {readingMinutes(post.body)} minute read
+  </small>
+  <h1>{title}</h1>
+  {tags.length > 0 && <p class="filed">Filed under {tagList}</p>}
+</header>
+
+{
+  coverImage && (
+    <figure class="cover">
+      <Image src={coverImage.url} alt={coverImage.alt} priority layout="constrained" />
+    </figure>
+  )
+}
+
+<article class="col prose prose-lg max-w-none">
+  <slot />
+</article>
+
+<aside class="col end">
+  <Image src={memoji} alt="" width={112} height={112} />
+  <p>
+    Written after bedtime by <a href="/">Nicolas Marien</a>, software engineer at PayFit. Want
+    to talk about it? Find me on <a href="https://mastodon.social/@nico29">Mastodon</a> or
+    <a href="https://x.com/nicolas_marien">X</a>.
+  </p>
+</aside>
+
+{
+  (newer || older) && (
+    <nav class="col next" aria-label="More posts">
+      {newer ? (
+        <a href={`/posts/${newer.id}`}>
+          <span>Newer</span>
+          <b>{newer.data.title}</b>
+        </a>
+      ) : (
+        <span />
+      )}
+      {older && (
+        <a href={`/posts/${older.id}`} class="older">
+          <span>Older</span>
+          <b>{older.data.title}</b>
+        </a>
+      )}
+    </nav>
+  )
+}
+
+<style>
+  /* Header, cover, text and footer share one column, as wide as the page allows. */
+  .col {
+    max-width: none;
+  }
+
+  header small {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--lamp);
+  }
+
+  .draft {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    margin: 0 0 2rem;
+    padding: 0.8rem 1rem;
+    border: 1px dashed var(--lamp);
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--lamp) 10%, transparent);
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Darkened a touch so it keeps 4.5:1 on the tinted background in the day theme. */
+  .draft strong {
+    color: color-mix(in srgb, var(--lamp) 75%, var(--text));
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 0.5rem 0 0.9rem;
+  }
+
+  .filed {
+    font-size: 0.95rem;
+    color: var(--dim);
+    margin: 0 0 2rem;
+  }
+
+  .cover {
+    margin: 0 0 2.25rem;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .cover :global(img) {
+    display: block;
+    width: 100%;
+    max-height: 18rem;
+    object-fit: cover;
+    opacity: var(--cover-opacity);
+    transition: opacity 0.5s;
+  }
+
+  article {
+    margin-top: 2rem;
+  }
+
+  .end {
+    margin-top: 3rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .end :global(img) {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+  }
+
+  .end p {
+    margin: 0;
+    font-size: 0.97rem;
+    line-height: 1.6;
+    color: var(--dim);
+  }
+
+  .end a {
+    color: var(--text);
+    text-underline-offset: 3px;
+  }
+
+  .next {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2.1rem;
+    font-size: 0.95rem;
+  }
+
+  .next a {
+    max-width: 48%;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .next a span {
+    display: block;
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--dim);
+    margin-bottom: 0.15rem;
+  }
+
+  .next b {
+    font-weight: 600;
+  }
+
+  .next a:hover b,
+  .next a:focus-visible b {
+    text-decoration: underline;
+    text-decoration-color: var(--lamp);
+    text-underline-offset: 4px;
+  }
+
+  .next .older {
+    text-align: right;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cover :global(img) {
+      transition: none;
     }
-  </div>
-  <article class="prose prose-lg max-w-none">
-    <slot />
-  </article>
-</section>
+  }
+
+  @media (max-width: 560px) {
+    h1 {
+      font-size: 1.75rem;
+    }
+
+    .next {
+      flex-direction: column;
+    }
+
+    .next a {
+      max-width: none;
+    }
+
+    .next .older {
+      text-align: left;
+    }
+  }
+</style>

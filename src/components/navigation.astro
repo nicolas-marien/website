@@ -1,11 +1,123 @@
-<nav class="p-4">
-  <ul class="flex justify-center space-x-6">
-    <li class="link link-hover">
-      <a href="/">home</a>
-    </li>
+---
+import { Image } from 'astro:assets';
+import memoji from '../assets/memoji.jpg';
+---
 
-    <li class="link link-hover">
-      <a href="/posts">posts</a>
-    </li>
-  </ul>
+<nav aria-label="Main">
+  <a class="me" href="/">
+    <Image src={memoji} alt="" width={64} height={64} loading="eager" />
+    Nicolas Marien
+  </a>
+  <div class="right">
+    <a href="/posts">Writing</a>
+    <button class="switch" type="button" aria-pressed="false">
+      Lights
+      <span class="plate" aria-hidden="true"><i></i></span>
+    </button>
+  </div>
 </nav>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.switch');
+  if (button) {
+    const sync = () =>
+      button.setAttribute(
+        'aria-pressed',
+        String(document.documentElement.getAttribute('data-theme') === 'day'),
+      );
+    sync();
+    button.addEventListener('click', () => {
+      const theme =
+        document.documentElement.getAttribute('data-theme') === 'day' ? 'night' : 'day';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      sync();
+    });
+  }
+</script>
+
+<style>
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  .me {
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* The name is the link text, so the avatar stays decorative (empty alt). */
+  .me img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 2px var(--night),
+      0 0 0 3px color-mix(in srgb, var(--lamp) 55%, transparent);
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .right a {
+    color: var(--dim);
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.5rem 0;
+  }
+
+  .right a:hover {
+    color: var(--text);
+  }
+
+  .switch {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--dim);
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .plate {
+    width: 26px;
+    height: 38px;
+    border-radius: 5px;
+    background: var(--wall);
+    display: grid;
+    place-items: center;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+
+  .plate i {
+    width: 10px;
+    height: 18px;
+    border-radius: 3px;
+    background: var(--dim);
+    transform: translateY(4px);
+    transition: transform 0.2s;
+  }
+
+  .switch[aria-pressed='true'] .plate i {
+    transform: translateY(-4px);
+    background: var(--lamp);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .plate i {
+      transition: none;
+    }
+  }
+</style>

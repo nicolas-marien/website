@@ -2,21 +2,31 @@
 import { getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 import Layout from '../../layouts/Layout.astro';
+import { getPublishedPosts } from '../../lib/posts';
 
 export async function getStaticPaths() {
+  // Drafts get a page too, so they can be proofread by URL.
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { id: post.id },
-    props: { post },
-  }));
+  const published = await getPublishedPosts();
+  return posts.map((post) => {
+    const index = published.findIndex((p) => p.id === post.id);
+    return {
+      params: { id: post.id },
+      props: {
+        post,
+        newer: index > 0 ? published[index - 1] : undefined,
+        older: index >= 0 ? published[index + 1] : undefined,
+      },
+    };
+  });
 }
-const { post } = Astro.props;
+const { post, newer, older } = Astro.props;
 const { Content } = await render(post);
 const title = `Nicolas Marien - ${post.data.title}`;
 ---
 
 <Layout title={title} noindex={post.data.draft}>
-  <BlogPost {...post.data}>
+  <BlogPost post={post} newer={newer} older={older}>
     <Content />
   </BlogPost>
 </Layout>

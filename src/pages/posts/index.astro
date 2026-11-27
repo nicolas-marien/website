@@ -1,27 +1,21 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import PostLink from '../../components/post-link.astro';
+import PostList from '../../components/post-list.astro';
+import { getPublishedPosts } from '../../lib/posts';
 
-import { getCollection, type CollectionEntry } from 'astro:content';
-
-let posts: CollectionEntry<'blog'>[] = await getCollection('blog');
-posts = posts
-  .filter((p) => !p.data.draft)
-  .sort(
-    (a, b) =>
-      new Date(b.data.published_at).getTime() - new Date(a.data.published_at).getTime(),
-  );
+const posts = await getPublishedPosts();
 ---
 
-<Layout>
-  {
-    posts.map((post) => (
-      <PostLink
-        id={post.id}
-        title={post.data.title}
-        abstract={post.data.abstract}
-        published_at={post.data.published_at}
-      />
-    ))
-  }
+<Layout title="Nicolas Marien - Writing">
+  <h1>Writing</h1>
+  <PostList posts={posts} />
 </Layout>
+
+<style>
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 0 0 1.5rem;
+  }
+</style>
