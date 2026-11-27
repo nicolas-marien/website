@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PostList from '../components/post-list.astro';
+import Plushes from '../components/plushes.astro';
 import { formatDate, getPublishedPosts } from '../lib/posts';
 
 const [latest, ...older] = await getPublishedPosts();
@@ -24,7 +25,14 @@ const [latest, ...older] = await getPublishedPosts();
     )
   }
 
-  <PostList posts={older.slice(0, 4)} fade />
+  {
+    older.length > 0 && (
+      <div class="shelf">
+        <Plushes />
+        <PostList posts={older.slice(0, 4)} fade />
+      </div>
+    )
+  }
   {
     older.length > 4 && (
       <a class="all" href="/posts">
@@ -54,7 +62,13 @@ const [latest, ...older] = await getPublishedPosts();
 
   .lit {
     max-width: 33em;
-    margin-bottom: 3rem;
+    /* Leaves room for the plushes sitting on the list's top rule. */
+    margin-bottom: 4.75rem;
+  }
+
+  .shelf {
+    position: relative;
+    max-width: 34em;
   }
 
   .lit small {
